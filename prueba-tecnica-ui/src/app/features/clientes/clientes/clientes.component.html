@@ -1,0 +1,44 @@
+<div class="container">
+  <h2>Lista de Clientes</h2>
+
+  @if (loading) {
+    <div class="alert alert-info">
+      Cargando...
+    </div>
+  }
+
+  @if (error) {
+    <div class="alert alert-danger">
+      {{ error }}
+    </div>
+  }
+
+  @if (!loading && clientes.length > 0) {
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Teléfono</th>
+          <th>País</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (cliente of clientes; track cliente.id) {
+          <tr>
+            <td>{{ cliente.id }}</td>
+            <td>{{ cliente.nombre }}</td>
+            <td>{{ cliente.telefono | phoneFormat }}</td>
+            <td>{{ cliente.pais }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+
+  @if (!loading && clientes.length === 0) {
+    <div class="alert alert-warning">
+      No se encontraron clientes.
+    </div>
+  }
+</div>
